@@ -2,6 +2,9 @@
 
 return [
 
+    // Disk for listing photos. 'public' locally; set LISTING_DISK=s3 in production (see docs/SCALING.md).
+    'listing_disk' => env('LISTING_DISK', 'public'),
+
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk

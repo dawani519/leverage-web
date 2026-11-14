@@ -1,0 +1,24 @@
+{
+    "id": "/",
+    "name": "Leverage",
+    "short_name": "Leverage",
+    "description": "Buy and sell with escrow protection. Your money is held safely until you confirm delivery.",
+    "start_url": "/?source=pwa",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#18181b",
+    "theme_color": "#1d4ed8",
+    "categories": ["shopping", "finance"],
+    "icons": [
+        { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+        { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+        { "src": "/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+        { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    ],
+    "shortcuts": [
+        { "name": "Sell an item", "url": "/marketplace/sell", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+        { "name": "Wallet", "url": "/wallet", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+        { "name": "Transactions", "url": "/transactions", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+    ]
+}

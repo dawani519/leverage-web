@@ -12,7 +12,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // The Paystack webhook is authenticated by its HMAC signature, not a browser CSRF token.
+        $middleware->validateCsrfTokens(except: ['webhooks/*']);
+
+        // Trace every request through logs, and throttle anonymous page traffic per IP.
+        $middleware->append(\App\Http\Middleware\AssignRequestId::class);
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+        $middleware->web(append: ['throttle:web']);
+
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\EnsureAdmin::class,
+            'not.suspended' => \App\Http\Middleware\EnsureNotSuspended::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

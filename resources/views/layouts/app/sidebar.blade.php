@@ -15,20 +15,48 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="shopping-bag" :href="route('marketplace.index')" :current="request()->routeIs('marketplace.index', 'marketplace.show')" wire:navigate>
+                        {{ __('Marketplace') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="plus-circle" :href="route('marketplace.sell')" :current="request()->routeIs('marketplace.sell')" wire:navigate>
+                        {{ __('Sell an item') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="rectangle-stack" :href="route('listings.mine')" :current="request()->routeIs('listings.mine')" wire:navigate>
+                        {{ __('My listings') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
+
+                <flux:sidebar.group :heading="__('Money')" class="grid">
+                    <flux:sidebar.item icon="wallet" :href="route('wallet.index')" :current="request()->routeIs('wallet.*')" wire:navigate>
+                        {{ __('Wallet') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="shield-check" :href="route('transactions.index')" :current="request()->routeIs('transactions.*')" wire:navigate>
+                        {{ __('Transactions') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="chat-bubble-left-right" :href="route('chat.index')" :current="request()->routeIs('chat.*')" wire:navigate>
+                        {{ __('Messages') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="identification" :href="route('brokers.apply')" :current="request()->routeIs('brokers.*')" wire:navigate>
+                        {{ __('Become a broker') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                @if (auth()->user()->isAdmin())
+                    <flux:sidebar.group :heading="__('Admin')" class="grid">
+                        <flux:sidebar.item icon="chart-bar" :href="route('admin.overview')" :current="request()->routeIs('admin.overview')" wire:navigate>{{ __('Overview') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="users" :href="route('admin.users')" :current="request()->routeIs('admin.users')" wire:navigate>{{ __('Users') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="rectangle-stack" :href="route('admin.listings')" :current="request()->routeIs('admin.listings')" wire:navigate>{{ __('Listings') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="arrows-right-left" :href="route('admin.escrows')" :current="request()->routeIs('admin.escrows')" wire:navigate>{{ __('Transactions') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="scale" :href="route('admin.disputes')" :current="request()->routeIs('admin.disputes')" wire:navigate>{{ __('Disputes') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="banknotes" :href="route('admin.deposits')" :current="request()->routeIs('admin.deposits')" wire:navigate>{{ __('Deposits') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="identification" :href="route('admin.brokers')" :current="request()->routeIs('admin.brokers')" wire:navigate>{{ __('Brokers') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="cog-6-tooth" :href="route('admin.settings')" :current="request()->routeIs('admin.settings')" wire:navigate>{{ __('Settings') }}</flux:sidebar.item>
+                        <flux:sidebar.item icon="clipboard-document-list" :href="route('admin.audit')" :current="request()->routeIs('admin.audit')" wire:navigate>{{ __('Audit log') }}</flux:sidebar.item>
+                    </flux:sidebar.group>
+                @endif
             </flux:sidebar.nav>
 
             <flux:spacer />
-
-            <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
-                </flux:sidebar.item>
-            </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
